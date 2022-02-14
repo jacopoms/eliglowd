@@ -8,8 +8,6 @@ defmodule Eliglowd.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      Eliglowd.Repo,
       # Start the Telemetry supervisor
       EliglowdWeb.Telemetry,
       # Start the PubSub system
