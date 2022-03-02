@@ -19,12 +19,10 @@ defmodule Eliglowd.GuardianApiTest do
   end
 
   test "fetch one single article"do
-    assert [
-      %Article{
+    assert %Article{
         title: "some Title",
         subtitle: "Article",
         html_text: "some html text"
-      }
-    ] = GuardianApi.fetch_article
+      } = GuardianApi.fetch_article
   end
 end
