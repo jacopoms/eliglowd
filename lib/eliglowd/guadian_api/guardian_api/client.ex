@@ -14,6 +14,12 @@ defmodule Eliglowd.GuardianApi.Client do
     |> Enum.into([])
   end
 
+  def process_response_body(body) do
+    body
+    |> Jason.decode!
+    |> Map.fetch("response")
+  end
+
   defp api_key do
     [ "Api-Key": @api_key]
   end
