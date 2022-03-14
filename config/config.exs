@@ -47,6 +47,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Configures the API key for the Guardian API
+if System.get_env("GUARDIAN_API_KEY") do
+  config :eliglowd,
+    api_key: System.get_env("GUARDIAN_API_KEY")
+end
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -1,5 +1,6 @@
 defmodule Eliglowd.GuardianApi.Article do
-  defstruct title: "",
+  defstruct id: "",
+            title: "",
             subtitle: "",
             html_text: ""
 end
