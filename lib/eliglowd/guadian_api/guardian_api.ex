@@ -1,11 +1,9 @@
 defmodule Eliglowd.GuardianApi do
-  import HTTPoison
 
   alias Eliglowd.GuardianApi.Article, as: Article
+  alias Eliglowd.GuardianApi.Client, as: Client
 
-  @base_url "http://content.guardianapis.com/"
-
-  def fetch_articles do
+  def search(query) do
     [
       %Article{
         title: "some Title",
@@ -20,11 +18,13 @@ defmodule Eliglowd.GuardianApi do
     ]
   end
 
-  def fetch_article do
-    %Article{
-      title: "some Title",
-      subtitle: "Article",
-      html_text: "some html text"
-    }
+  def fetch_article_by_id(id) do
+    if id do
+      %Article{
+        title: "some Title",
+        subtitle: "Article",
+        html_text: "some html text"
+      }
+    end
   end
 end
