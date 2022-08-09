@@ -5,15 +5,24 @@ defmodule Eliglowd.GuardianApi.Client do
   @api_key Application.get_env(:eliglowd, :api_key)
 
 
-  def fetch_articles_for(query) do
-    case get("search?q=" <> query) do
+  def make_get_request(query) do
+    case get(query) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        %{"results" => results } = elem(body, 1)
-        results
+        with %{"results" => results } <- elem(body, 1)
+             {:ok, results}
+        else
+          body -> body
+        end
+      {:ok, %HTTPoison.Response{status_code: 403 }} ->
+        IO.puts "Forbidden"
+        {:error, :forbidden}
       {:ok, %HTTPoison.Response{status_code: 404 }} ->
         IO.puts "Not Found"
+        {:error, :not_found}
       {:error, %HTTPoison.Error{reason: reason}} ->
-        IO.puts "Error" <> reason
+        IO.puts "Error"
+        IO.inspect(reason)
+        {:error, reason }
     end
   end
 
